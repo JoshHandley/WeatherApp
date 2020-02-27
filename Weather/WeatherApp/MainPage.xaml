@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" 
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:WeatherApp"
+             x:Class="WeatherApp.MainPage">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <Style x:Key="labelStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="Small" />
+                <Setter Property="TextColor" 
+                        Value="Gray" />
+            </Style>
+            
+            <Style x:Key="labelResultStyle" 
+                   TargetType="Label">
+                <Setter Property="FontSize" 
+                        Value="Medium" />
+                <Setter Property="Margin" 
+                        Value="10,0,0,0" />
+            </Style>
+            
+            <local:LongToDateTimeConverter x:Key="longToDateTimeConverter" />
+        </ResourceDictionary>
+    </ContentPage.Resources>
+    
+    <StackLayout>
+        <Grid BackgroundColor="#545454" 
+              Padding="10,20,10,10">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
+            
+            <Label Text="Search by City" 
+                   Grid.ColumnSpan="3"
+                   HorizontalOptions="Center"
+                   TextColor="White" 
+                   FontAttributes="Bold" 
+                   FontSize="Medium" />
+            
+            <Label Text="City:" 
+                   Grid.Row="1" 
+                   VerticalOptions="Center"
+                   Style="{StaticResource labelStyle}"
+                   TextColor="#C0C0C0" />
+            
+            <Entry x:Name="cityEntry"
+                   Grid.Row="1" 
+                   Grid.Column="1"
+                   Margin="5,0"
+                   VerticalOptions="Center"
+                   BackgroundColor="DarkGray"
+                   TextColor="White"
+                   Text="" />
+            
+            <Button Grid.Row="1" 
+                    Grid.Column="2"
+                    Text="Get Weather" 
+                    BorderWidth="1"
+                    BorderColor="White"
+                    BackgroundColor="DarkGray"
+                    TextColor="White"
+                    Clicked="OnGetWeatherButtonClicked" />
+            <Button Grid.Row="1" 
+                    Grid.Column="3"
+                    Text="Add to Favorites" 
+                    BorderWidth="1"
+                    BorderColor="White"
+                    BackgroundColor="DarkGray"
+                    TextColor="White"
+                    Clicked="OnAddToFavoritesButtonClicked" />
+            <Button Grid.Row="1" 
+                    Grid.Column="4"
+                    Text="Delete Favorite" 
+                    BorderWidth="1"
+                    BorderColor="White"
+                    BackgroundColor="DarkGray"
+                    TextColor="White"
+                    Clicked="OnDeleteFavoritesButtonClicked" />
+        </Grid>
+
+        <ListView x:Name="listView">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding LocationName}" />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>    
+</ContentPage>
